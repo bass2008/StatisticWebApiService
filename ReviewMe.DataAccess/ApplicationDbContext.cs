@@ -1,16 +1,12 @@
 ﻿using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace ReviewMe
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Player> Players { get; set; }
+        public DbSet<Visitor> Visitors { get; set; }
 
         static ApplicationDbContext()
         {

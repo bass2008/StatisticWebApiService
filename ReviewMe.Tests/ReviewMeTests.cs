@@ -20,11 +20,11 @@ namespace ReviewMe.Tests
             var statisticService = serviceLocator.Resolve<StatisticService>();
             
             // Act
-            var firstCount = statisticService.GetVisitorsCount(TestUserName).Result;
-            statisticService.AddHumanVisitors(TestUserName, TestCount).Wait();
-            var newCount = statisticService.GetVisitorsCount(TestUserName).Result;
-            statisticService.DeleteVisitorsCount(TestUserName).Wait();
-            var endCount = statisticService.GetVisitorsCount(TestUserName).Result;
+            var firstCount = statisticService.GetVisitorsCountAsync(TestUserName).Result;
+            statisticService.AddVisitorsCountAsync(TestUserName, TestCount).Wait();
+            var newCount = statisticService.GetVisitorsCountAsync(TestUserName).Result;
+            statisticService.ClearVisitorsCountAsync(TestUserName).Wait();
+            var endCount = statisticService.GetVisitorsCountAsync(TestUserName).Result;
             
             // Assert
             Assert.IsTrue(firstCount == 0);

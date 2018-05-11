@@ -8,10 +8,10 @@ namespace ReviewMe.Client.Console.Metadata
         [Get("/visitors/count")]
         Task<int> GetVisitorsCountAsync(string player);
 
-        [Get("/add")]
+        [Get("/visitors/add")]
         Task AddHumanVisitors(string player, int count);
 
-        [Delete("/visitors/count")]
+        [Delete("/visitors/clear")]
         Task DeleteVisitorsCount(string player);
     }
 }

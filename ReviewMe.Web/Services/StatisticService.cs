@@ -9,11 +9,11 @@ namespace ReviewMe.Web.Services
 {
     public class StatisticService
     {
-        private readonly IRepository<Player> _playerRepository;
+        private readonly IRepository<Visitor> _playerRepository;
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public StatisticService(IRepository<Player> playerRepository, IUnitOfWork unitOfWork)
+        public StatisticService(IRepository<Visitor> playerRepository, IUnitOfWork unitOfWork)
         {
             _playerRepository = playerRepository;
             _unitOfWork = unitOfWork;
@@ -21,7 +21,7 @@ namespace ReviewMe.Web.Services
 
         /// <summary>
         /// В отличие от классов Monitor, Mutex и ReaderWriterLock, класс Semaphore не поддерживает сходство потоков. 
-        /// Это означает, что его можно использовать в сценариях, в которых один поток получает семафор, а другой поток освобождает его.        /// 
+        /// Это означает, что его можно использовать в сценариях, в которых один поток получает семафор, а другой поток освобождает его.
         /// </summary>
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1);
 
@@ -44,43 +44,43 @@ namespace ReviewMe.Web.Services
             }
         }
 
-        private async Task DoAddHumanVisitors(string playerName, int value)
+        private async Task DoAddVisitorsCount(string playerName, int value)
         {
-            var player = await _playerRepository.Get(x => x.Name == playerName);
+            var player = await _playerRepository.GetAsync(x => x.Name == playerName);
             if (player == null)
             {
-                player = new Player
+                player = new Visitor
                 {
                     Name = playerName
                 };
                 _playerRepository.Add(player);
                 await _unitOfWork.SaveChangesAsync();
             }
-            player.HumanCount += value;
+            player.Count += value;
             await _unitOfWork.SaveChangesAsync();
         }
         
-        private async Task DoDeleteVisitorsCount(string playerName)
+        private async Task DoClearVisitorsCount(string playerName)
         {
-            var player = await _playerRepository.Get(x => x.Name == playerName);
-            player.HumanCount = 0;
+            var player = await _playerRepository.GetAsync(x => x.Name == playerName);
+            player.Count = 0;
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task AddHumanVisitors(string playerName, int value)
+        public async Task AddVisitorsCountAsync(string playerName, int value)
         {
-            await RunThreedSafe(() => DoAddHumanVisitors(playerName, value));
+            await RunThreedSafe(() => DoAddVisitorsCount(playerName, value));
         }
 
-        public async Task DeleteVisitorsCount(string playerName)
+        public async Task ClearVisitorsCountAsync(string playerName)
         {
-            await RunThreedSafe(() => DoDeleteVisitorsCount(playerName));
+            await RunThreedSafe(() => DoClearVisitorsCount(playerName));
         }
         
-        public async Task<int> GetVisitorsCount(string playerName)
+        public async Task<int> GetVisitorsCountAsync(string playerName)
         {
-            var player = await _playerRepository.Get(x => x.Name == playerName);
-            return player?.HumanCount ?? 0;
+            var player = await _playerRepository.GetAsync(x => x.Name == playerName);
+            return player?.Count ?? 0;
         }
     }
 }

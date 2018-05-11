@@ -16,7 +16,6 @@ namespace Biosphere.Common.DataAccess.UnitOfWork
         public void Dispose()
         {
             Context?.Dispose();
-            GC.SuppressFinalize(this);
         }
 
         public void SaveChanges()

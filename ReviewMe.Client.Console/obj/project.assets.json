@@ -4403,11 +4403,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\ReviewMe.Web\\ReviewMe.Client.Console\\ReviewMe.Client.Console.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\StatisticWebApiService\\ReviewMe.Client.Console\\ReviewMe.Client.Console.csproj",
       "projectName": "ReviewMe.Client.Console",
-      "projectPath": "C:\\Users\\Admin\\source\\repos\\ReviewMe.Web\\ReviewMe.Client.Console\\ReviewMe.Client.Console.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\StatisticWebApiService\\ReviewMe.Client.Console\\ReviewMe.Client.Console.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\source\\repos\\ReviewMe.Web\\ReviewMe.Client.Console\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\StatisticWebApiService\\ReviewMe.Client.Console\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -28,7 +28,7 @@ namespace ReviewMe.Client.Console
         
         static async Task MainAsync()
         {
-            var api = RestClient.For<IReviewMeWeb>("http://localhost:49943");
+            var api = RestClient.For<IReviewMeWeb>("http://localhost:49943/api/statistic/");
 
             await api.DeleteVisitorsCount("player1");
 

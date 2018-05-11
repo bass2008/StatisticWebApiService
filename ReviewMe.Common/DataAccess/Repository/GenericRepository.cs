@@ -43,19 +43,14 @@ namespace Biosphere.Common.DataAccess.Repository
             Set.Remove(entity);
         }
         
-        public async Task<T> Get(Expression<Func<T, bool>> where)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> where)
         {
             return await Set.FirstOrDefaultAsync(where);
         }
         
         public void Dispose()
         {
-            if (Context != null)
-            {
-                Context.Dispose();
-            }
-
-            GC.SuppressFinalize(this);
+            Context?.Dispose();
         }
         
         public virtual void Edit(T entity)
